@@ -43,7 +43,7 @@ public class riverGenerator : MonoBehaviour
         StartCoroutine(RainCall());
         Debug.Log("Start");
 
-        raindisplay.text = (rainRate * 100000).ToString();
+        raindisplay.text = rainRate.ToString();
 
     }
 
@@ -54,7 +54,7 @@ public class riverGenerator : MonoBehaviour
         
 
 
-        Rain(rainRate);
+        Rain(rainRate/100000);
 
         Flow();
         
@@ -368,7 +368,7 @@ public class riverGenerator : MonoBehaviour
         if (rainRate < 0) rainRate = 0;
         else if (rainRate > 4) rainRate = 4;
 
-        raindisplay.text = (rainRate * 100000).ToString();
+        raindisplay.text = rainRate.ToString();
     }
 
 
