@@ -1,0 +1,160 @@
+---
+title: "Attendance Data Analysis Brittany Course"
+output: html_document
+date: "2024-07-31"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ggplot2)
+library(readr)
+library(dplyr)
+library(stringr)
+library(lubridate)
+#library(tidyr) Always an issue downloading this package, do manually from packages dashboard version 1.3.0
+
+```
+
+```{r data-cleaning}
+allLogs <- read_csv("allLogs.csv")
+
+#View(allLogs)
+#Focusing on HEIN110372023-4
+
+allLogs$course <- as.factor(allLogs$course)
+allLogs$Role <- as.factor(allLogs$Role)
+allLogs$sessionType <- as.factor(allLogs$sessionType)
+
+```
+
+```{r splitting-by-course-code}
+filter_by_course <- function(dataframe, course_column){
+  course_column <- as.character(substitute(course_column))
+  
+  individual_courses <- dataframe %>%
+    group_by(!!sym(course_column)) %>%
+    group_split
+  
+  course_data_frames <- setNames(lapply(individual_courses, as.data.frame), 
+                                 sapply(individual_courses, function(x) x[[course_column]][1]))
+
+return(course_data_frames)
+
+}
+
+course_data <- filter_by_course(allLogs, course)
+
+```
+
+```{r isolate-HEIN11372023-4}
+#The following code has only been tested on HEIN110372023-4. Will need to transform into functions.
+
+HEIN110372023_data <- course_data[['HEIN110372023-4']]
+
+#Remove the date from columns + create new Date column
+HEIN110372023_data <- HEIN110372023_data %>%
+  mutate(Date = as.Date(str_extract(`First join`, "^\\d{2}/\\d{2}/\\d{4}"), format = "%m/%d/%Y"),
+         `First join` = str_extract(`First join`, "\\d{2}:\\d{2}:\\d{2}$"),
+         `Last leave` = str_extract(`Last leave`, "\\d{2}:\\d{2}:\\d{2}$"))
+
+#Determing whether session was morning or evening
+HEIN110372023_data <- HEIN110372023_data %>%
+  mutate(hour = as.integer(substr(`First join`, 1, 2)),
+         session_time = ifelse(hour < 12, "Morning", "Evening")) %>%
+  select(-hour)
+
+```
+
+
+```{r session-length}
+#Determining whether session was supposed to be 1 or 2 hours long
+moderator_times <- HEIN110372023_data %>%
+  mutate(Total_time_seconds = period_to_seconds(hms(`Total time`))) %>%
+  filter(Role == "Moderator")
+
+average_moderator_time <- moderator_times %>%
+  group_by(Date) %>%
+  summarise(average_time_seconds = mean(Total_time_seconds))
+
+
+classify_session_length <- function(time_seconds) {
+  if (time_seconds >= 1800 & time_seconds <= 5400) {
+    return("1 hour")
+  } else if (time_seconds > 5400) {
+    return("2 hours")
+  } else {
+    return(NA)
+  }
+}
+
+
+average_moderator_time <- average_moderator_time %>%
+  mutate(session_length = sapply(average_time_seconds, classify_session_length))
+
+HEIN110372023_data <- HEIN110372023_data %>%
+  left_join(average_moderator_time %>% select(Date, session_length), by = "Date")
+
+```
+
+
+
+```{r anomalies}
+#Check for any weird sessions, will need to remove manually i.e. people who accidentally joined early (usually signified by only staying for a few seconds) or forgot to leave (30 min leeway)
+HEIN110372023_data <- HEIN110372023_data %>%
+  mutate(Total_time_minutes = period_to_seconds(hms(`Total time`)) / 60, potential_anomaly = Total_time_minutes < 10)
+
+HEIN110372023_data <- HEIN110372023_data %>%
+  mutate(allowed_time_minutes = case_when(
+    session_length == "1 hour" ~ 90, 
+    session_length == "2 hours" ~ 150, 
+    TRUE ~ NA_real_
+  ))
+
+
+HEIN110372023_data <- HEIN110372023_data %>%
+  mutate(potential_anomaly = Total_time_minutes < 10 | Total_time_minutes > allowed_time_minutes)
+
+#Below sorted dataframe so 'TRUE' entries are isolated
+
+View(HEIN110372023_data %>%
+  filter(potential_anomaly == TRUE))
+
+```
+
+
+```{r session-order}
+#Determining whether the session was the first or second session
+HEIN110372023_data <- HEIN110372023_data %>%
+  # create date variables 
+  mutate(Date = ymd(Date),
+         Week = week(Date), 
+         Weekday = wday(Date, label = TRUE)) %>%
+  mutate(session_time = factor(session_time, levels = c('Morning', 'Evening'))) %>%
+  # arrange rows in data by week, weekday, session time to then group 
+  arrange(Week, Weekday, session_time) %>%
+  # grouping all data by week 
+  group_by(Week) %>%
+  # create position variable 
+  mutate(Position = match(sessionType, unique(sessionType))) %>%
+  # ungrouping the data 
+  ungroup()
+
+
+```
+
+
+```{r name-cleaning}
+
+#HEIN110372023_data_cleaned %>%
+  #filter(., AttendeeType == 'Guest')
+
+```
+ 
+janitor package, clean_names() function
+R naming conventions for variables = snake_case CamelCase
+BUT for code chunks you wants kabab-case 
+
+
+Write assumptions at the top
+For anomalies, add another column for whether they were long or short
+Make summary table in wide format, pivot_wider

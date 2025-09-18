@@ -1,0 +1,38 @@
+,name,date,board,text
+0,Yoon Choi,25 Feb 2023 04:15,"Week 1 - Three stars and a wish (⭐⭐⭐💭)
+Introduction to databases and information systems (2022-2023)[FLEX]
+Week 1 - Three stars and a wish (⭐⭐⭐💭)","*started to think about databases in a different light - a more-concrete understanding of the notion ""data is everywhere"")
+* different types of databases and their applications
+* how to run a few SQL queries (SELECT, FROM, WHERE, etc)
+-need to run a few more rounds of practice with different conditions, etc. The grammar used in SQL queries is intuitive, but would need more practice to build a stronger memory (to the level of auto-complete!)"
+1,Anonymous,24 Feb 2023 11:08,"Week 1 - Three stars and a wish (⭐⭐⭐💭)
+Introduction to databases and information systems (2022-2023)[FLEX]
+Week 1 - Three stars and a wish (⭐⭐⭐💭)","⭐️ I have more of a handle on the meaning of and differences between; databases, DBMS, information systems and applications that access the database.
+⭐️. Basic knowledge of the general form and order of elements in a SELECT expression to query a relational database.
+⭐️ Awareness of (& excitement about) the open source databases available.
+💭 No clue yet about what the rules/possibilities are for developing databases for local use within an NHS organisation in the context of maintaining data protection & restrictions on open source IT."
+2,Simon Hulme,"24 Feb 2023 10:19
+(Edited by Simon Hulme on 24 Feb 2023 10:21)","Week 1 - Three stars and a wish (⭐⭐⭐💭)
+Introduction to databases and information systems (2022-2023)[FLEX]
+Week 1 - Three stars and a wish (⭐⭐⭐💭)","*SQL queries and tidyverse functions similar which has helped me 
+*few rules around formatting SQL but good to follow conventions to facilitate sharing of code
+*databases and information systems are everywhere and underpin many activities I am involved with every day
+-I would like to understand how to interact with a database which is server/cloud based."
+3,Anonymous,22 Feb 2023 15:28,"Week 1 - Three stars and a wish (⭐⭐⭐💭)
+Introduction to databases and information systems (2022-2023)[FLEX]
+Week 1 - Three stars and a wish (⭐⭐⭐💭)","* began the journey of learning a new language
+* found there can be multiple ways of producing the same output
+* eyes opened into the many types of database systems and software
+- very understandable commands but need to secure the grammar in my head"
+4,Anonymous,5 Mar 2023 11:33,"Week 2 – Three stars and a wish (⭐⭐⭐💭)
+Introduction to databases and information systems (2022-2023)[FLEX]
+Week 2 – Three stars and a wish (⭐⭐⭐💭)","⭐️ Better handle on how to format sql code to make it human readable.
+⭐️ Got some sense of the range of simple conditional, boolean etc operators and functions available to SELECT.
+⭐️ A structure/nomenclature around dirty data.
+💭 Need to refer to notes a lot to remind myself of the syntax, not much is yet in my long-term memory."
+5,Anonymous,24 Mar 2023 11:27,"Week 3 – Three stars and a wish (⭐⭐⭐💭)
+Introduction to databases and information systems (2022-2023)[FLEX]
+Week 3 – Three stars and a wish (⭐⭐⭐💭)","⭐️ Better idea of range of options with database deployment (although still need to understand to what extent our own organisation uses SaaS/Cloud vs self-hosted).
+⭐️ I understand the principles behind joins, primary and foreign keys.
+⭐️ The will to improve data sharing as detailed in the 7th Caldicott principle.
+💭 Still need a lot more practice before the sql syntax is embedded."

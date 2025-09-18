@@ -1,0 +1,53 @@
+,name,date,board,text
+0,Pawel Orzechowski,12 Dec 2024 12:40,Help us to make this course better: Bugs and Features,deal more gracefully with downloads to new folders
+1,Pawel Orzechowski,7 Dec 2024 16:14,Help us to make this course better: Bugs and Features,in some places eg. badge 5 many code chunks have the same id eg. 'wordcloud' so cannot be knitted
+2,Franz Krämer,26 Nov 2024 22:38,Help us to make this course better: Bugs and Features,"In badge 11, in the chunk after the MLmetrics package is loaded, the argument order for Precision() seems to be mixed up a bit – it's prediction, actual while the documentation says it must be y_true, ypred. I calculated precision and recall by hand and it just wouldn't add up with the printed results. 😅"
+3,Pawel Orzechowski,25 Nov 2024 13:26,Help us to make this course better: Bugs and Features,"Error in hint hint_11_3. Well spotted @Dylan
+
+---
+In the notes we have:
+
+T1 Disease 10 18 Diabetes - FALSE POSITIVE (**THIS ONE WAS WRONG**)
+T2 Drug 30 36 Insulin - TRUE POSITIVE (in both gold and pred)
+T3 Disease 50 58 Diabetes - FALSE NEGATIVE
+
+PRED:
+
+T1 Disease 10 19 Diabetes - FALSE POSITIVE
+T2 Drug 30 36 Insulin - TRUE POSITIVE (in both gold and pred)
+
+
+So in the notes it should be:
+
+GOLD:
+
+T1 Disease 10 18 Diabetes - FALSE NEGATIVE (it was not predicted, but it IS there. Because of the typo in 18/19)
+T2 Drug 30 36 Insulin - TRUE POSITIVE (in both gold and pred)
+T3 Disease 50 58 Diabetes - FALSE NEGATIVE (it was not predicted, but it IS there)
+
+PRED:
+
+T1 Disease 10 19 Diabetes - FALSE POSITIVE (it was predicted, but it IS NOT there. because of the typo in 18/19)
+T2 Drug 30 36 Insulin - TRUE POSITIVE (in both gold and pred)"
+4,Pawel Orzechowski,"20 Nov 2024 15:08
+(Edited by Pawel Orzechowski on 20 Nov 2024 15:15)",Help us to make this course better: Bugs and Features,"What to do when HINTS are not opening correctly?
+When hints are not opening correctly (usually after restarting the RStudio) it means that RStudio LOST CONTEXT of what project it should be referring to (so it does not where to look for hints)."
+5,Franz Krämer,15 Nov 2024 18:35,Help us to make this course better: Bugs and Features,"I would kindly like to make a suggestion regarding the documentation of the code. I stumbled upon this when working on Badge 8. In the notebook there are some custom functions. When trying to work through them, I found it occasionally a bit hard to grasp what their arguments are and where these arguments will come from and what the result is expected to be. Maybe it would make things a bit clearer if there was a short docstring above such functions that tells about the parameters and expected results. Maybe such docstrings could even be used as a way of explaining things. Howevery, this is probably more relevant for the next round of the course, where a short introduction into how to read these docstrings could be provided."
+6,Franz Krämer,14 Nov 2024 17:20,Help us to make this course better: Bugs and Features,"In badge 7, where we start using the quanteda package for feature extraction, corpus() from quanteda uses ""df"" as the first argument. For the code to work, it should be ""Corona_NLP_DF"". I typed a few notes for myself, so I cannot provide the exact line (sorry!), but it's in the code chunk below ""## Method 2: Using *quanteda*""."
+7,Pawel Orzechowski,12 Nov 2024 18:27,Help us to make this course better: Bugs and Features,"in badge 07, uncomment line 304 or pacman that library"
+8,Rebecca Sewell,10 Nov 2024 16:44,Help us to make this course better: Bugs and Features,"In badge 7, I am having trouble retrieving the GloVE file
+
+Running this:
+options(timeout = 600)
+download.file(""http://nlp.uoregon.edu/download/embeddings/glove.6B.100d.txt"", 
+       ""./data/glove.6B.100d.txt"") 
+
+I am receiving this error:
+Warning messages:
+1: In download.file(""http://nlp.uoregon.edu/download/embeddings/glove.6B.100d.txt"",  :
+  URL http://nlp.uoregon.edu/download/embeddings/glove.6B.100d.txt: cannot open destfile './data/glove.6B.100d.txt', reason 'No such file or directory'
+2: In download.file(""http://nlp.uoregon.edu/download/embeddings/glove.6B.100d.txt"",  :
+  download had nonzero exit status"
+9,Rebecca Sewell,10 Nov 2024 15:00,Help us to make this course better: Bugs and Features,"In badge 7, creating the DTM with tm package seemed to remove stop words and lower the case in the process. Then in the next step we were asked to try doing these things to the corpus, but they were in fact already done I think?
+
+I may have got this wrong, if so please let me know!"

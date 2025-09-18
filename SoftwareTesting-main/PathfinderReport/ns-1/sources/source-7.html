@@ -1,0 +1,345 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > pathfinder</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">uk.ac.ed.info</a>
+</div>
+
+<h1>Coverage Summary for Class: pathfinder (uk.ac.ed.info)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">pathfinder</td>
+<td class="coverageStat">
+  <span class="percent">
+    75%
+  </span>
+  <span class="absValue">
+    (3/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    75%
+  </span>
+  <span class="absValue">
+    (12/16)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    83.8%
+  </span>
+  <span class="absValue">
+    (31/37)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">pathfinder$jsonPoint</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">pathfinder$jsonPoint$point</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">pathfinder$jsonPoint$prop</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">pathfinder$NodeComparator</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    33.3%
+  </span>
+  <span class="absValue">
+    (5/15)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    75%
+  </span>
+  <span class="absValue">
+    (12/16)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    61.1%
+  </span>
+  <span class="absValue">
+    (33/54)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package uk.ac.ed.info;
+&nbsp;
+&nbsp;import uk.ac.ed.inf.ilp.constant.SystemConstants;
+&nbsp;import uk.ac.ed.inf.ilp.data.LngLat;
+&nbsp;import com.fasterxml.jackson.databind.ObjectMapper;
+&nbsp;import java.io.File;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;import java.math.BigDecimal;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;public class pathfinder {
+&nbsp;    private LngLatHandler handler;
+&nbsp;    //private MinHeap minHeap;
+&nbsp;    private PriorityQueue&lt;Node&gt; queue;
+&nbsp;    private HashSet&lt;LngLat&gt; searched;
+&nbsp;
+<b class="fc">&nbsp;    public pathfinder(LngLatHandler h){</b>
+<b class="fc">&nbsp;        handler = h;</b>
+<b class="fc">&nbsp;        queue = new PriorityQueue&lt;Node&gt;(64, new NodeComparator());</b>
+<b class="fc">&nbsp;        searched = new HashSet&lt;LngLat&gt;();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public List&lt;Node&gt; pathTo(LngLat start, LngLat end) throws IOException { //presumes start and end are in valid airspace
+<b class="fc">&nbsp;        Node startNode = new Node(end, start, BigDecimal.ZERO, 999,handler, null);</b>
+&nbsp;
+<b class="fc">&nbsp;        List&lt;Node&gt; foundPath = new ArrayList&lt;Node&gt;();</b>
+&nbsp;
+<b class="fc">&nbsp;         queue.add(startNode);</b>
+<b class="fc">&nbsp;        int propCounter = 0;</b>
+<b class="fc">&nbsp;        Node foundRoute = null;</b>
+&nbsp;
+<b class="pc">&nbsp;        while(foundRoute == null){</b>
+&nbsp;            //Node growth = minHeap.remove();
+<b class="fc">&nbsp;            Node growth = queue.poll();</b>
+&nbsp;
+<b class="fc">&nbsp;            if(handler.isCloseTo(growth.getPos(),end)){</b>
+<b class="fc">&nbsp;                foundRoute = growth;</b>
+&nbsp;                break;
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            searched.add(growth.getPos());</b>
+&nbsp;
+<b class="fc">&nbsp;            List&lt;Node&gt; newNodes = propagate(growth, end);</b>
+&nbsp;            //minHeap.insert(n);
+<b class="fc">&nbsp;            queue.addAll(newNodes);</b>
+&nbsp;
+<b class="pc">&nbsp;            if(propCounter &gt; 3000000){</b>
+&nbsp;                //throw new RuntimeException(&quot;search Time out&quot;);
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            propCounter++;</b>
+&nbsp;
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        foundPath.add(foundRoute);</b>
+<b class="fc">&nbsp;        Node prevNode = foundRoute;</b>
+<b class="fc">&nbsp;        while(prevNode.getPrevNode() != null){</b>
+<b class="fc">&nbsp;            prevNode = prevNode.getPrevNode();</b>
+&nbsp;
+<b class="fc">&nbsp;            foundPath.add(prevNode);</b>
+&nbsp;        }
+&nbsp;        //System.out.println(&quot;PropCounter: &quot; + propCounter++);
+<b class="fc">&nbsp;        return foundPath.reversed();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private List&lt;Node&gt; propagate(Node from, LngLat goal){
+<b class="fc">&nbsp;        List&lt;Node&gt; newNodes = new ArrayList&lt;Node&gt;();</b>
+<b class="fc">&nbsp;        for(int i = 0; i &lt; 16; i++){</b>
+<b class="fc">&nbsp;            double angle = i*22.5;</b>
+<b class="fc">&nbsp;            LngLat pos = handler.nextPosition(from.getPos(), angle);</b>
+<b class="fc">&nbsp;            if(!handler.isInNoFly(pos) &amp;&amp; !searched.contains(pos)){</b>
+<b class="fc">&nbsp;                newNodes.add(new Node(goal, pos, from.getDisTraveled(),angle, handler, from));</b>
+&nbsp;
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return newNodes;</b>
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    private static class NodeComparator implements Comparator&lt;Node&gt;{</b>
+&nbsp;        public int compare(Node n1, Node n2) {
+&nbsp;
+<b class="fc">&nbsp;            return n1.getScore().compareTo(n2.getScore());</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public void exportPoints(HashSet&lt;LngLat&gt; points) throws IOException {
+<b class="nc">&nbsp;        List&lt;jsonPoint&gt; jPoints = new ArrayList&lt;jsonPoint&gt;();</b>
+&nbsp;
+<b class="nc">&nbsp;        for (LngLat p : points) {</b>
+<b class="nc">&nbsp;            jPoints.add(new jsonPoint(p));</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        ObjectMapper objectMapper = new ObjectMapper();</b>
+<b class="nc">&nbsp;        objectMapper.writeValue(new File(&quot;C:/Users/stanc/Documents/Desktop/ILACW1/searchedNodes.json&quot;), jPoints);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;    private class jsonPoint{
+<b class="nc">&nbsp;        private String type = &quot;Feature&quot;;</b>
+&nbsp;        private point geometry;
+&nbsp;
+<b class="nc">&nbsp;        private prop properties = new prop();</b>
+&nbsp;
+<b class="nc">&nbsp;        public String getType(){return type;}</b>
+<b class="nc">&nbsp;        public point getGeometry(){return geometry;}</b>
+<b class="nc">&nbsp;        public prop getProperties(){return  properties;}</b>
+&nbsp;
+<b class="nc">&nbsp;        public jsonPoint(LngLat p){</b>
+<b class="nc">&nbsp;            geometry = new point(p);</b>
+&nbsp;
+&nbsp;        }
+&nbsp;
+&nbsp;
+&nbsp;
+<b class="nc">&nbsp;        private class prop{</b>
+<b class="nc">&nbsp;            private String marker_color = &quot;#FF0000&quot;;</b>
+&nbsp;
+<b class="nc">&nbsp;            public String getMarker_color(){return marker_color;}</b>
+&nbsp;        }
+&nbsp;        private class point{
+<b class="nc">&nbsp;            private String type = &quot;Point&quot;;</b>
+&nbsp;            private double[] coordinates;
+&nbsp;
+<b class="nc">&nbsp;            public String getType(){return type;}</b>
+<b class="nc">&nbsp;            public double[] getCoordinates(){return  coordinates;}</b>
+<b class="nc">&nbsp;            public point(LngLat p){</b>
+<b class="nc">&nbsp;                coordinates = new double[]{p.lng(),p.lat()};</b>
+&nbsp;            }
+&nbsp;
+&nbsp;
+&nbsp;        }
+&nbsp;
+&nbsp;
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-01-20 15:07</div>
+</div>
+</body>
+</html>

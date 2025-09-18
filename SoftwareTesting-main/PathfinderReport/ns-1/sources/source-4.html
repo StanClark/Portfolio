@@ -1,0 +1,142 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Node</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">uk.ac.ed.info</a>
+</div>
+
+<h1>Coverage Summary for Class: Node (uk.ac.ed.info)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Node</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    83.3%
+  </span>
+  <span class="absValue">
+    (5/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    91.7%
+  </span>
+  <span class="absValue">
+    (11/12)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package uk.ac.ed.info;
+&nbsp;import uk.ac.ed.inf.ilp.data.LngLat;
+&nbsp;import uk.ac.ed.inf.ilp.constant.SystemConstants;
+&nbsp;
+&nbsp;import java.math.BigDecimal;
+&nbsp;
+&nbsp;
+&nbsp;public class Node {
+&nbsp;    private final LngLat pos;
+&nbsp;
+&nbsp;    private final Node prevNode;
+&nbsp;    private final BigDecimal disTraveled;
+&nbsp;    private final BigDecimal disToGoal;
+&nbsp;
+&nbsp;    private final BigDecimal score;
+&nbsp;
+&nbsp;    private final double angle; //angle the node was produced from
+&nbsp;
+<b class="fc">&nbsp;    public Node(LngLat goal, LngLat point, BigDecimal prevDistance, double a, LngLatHandler handler, Node prevN){</b>
+<b class="fc">&nbsp;        this.pos = point;</b>
+<b class="fc">&nbsp;        this.disToGoal =BigDecimal.valueOf(handler.distanceTo(pos, goal)).multiply(BigDecimal.valueOf(1.5));</b>
+<b class="fc">&nbsp;        this.angle = a;</b>
+<b class="fc">&nbsp;        this.disTraveled = prevDistance.add(BigDecimal.valueOf(SystemConstants.DRONE_MOVE_DISTANCE));</b>
+<b class="fc">&nbsp;        this.prevNode = prevN;</b>
+<b class="fc">&nbsp;        score = disTraveled.add(disToGoal);</b>
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    public LngLat getPos() {return pos;}</b>
+&nbsp;    public BigDecimal getScore(){
+<b class="fc">&nbsp;        return score;</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    public double getAngle(){return angle;}</b>
+&nbsp;
+<b class="fc">&nbsp;    public BigDecimal getDisTraveled(){return disTraveled;}</b>
+&nbsp;
+<b class="fc">&nbsp;    public Node getPrevNode(){return prevNode;}</b>
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-01-20 15:07</div>
+</div>
+</body>
+</html>
