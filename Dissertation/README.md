@@ -2,8 +2,6 @@
 
 This is the disseration I created in my final year at the University of Edinburgh during my studies. 
 
-This involved working with large datasets that required precise cleaning and effcient processing.
-
 This project involved:
 * working with large datasets that required precise cleaning and effcient processing.
 * corresponding with experts in forestry to create a more wholistic understanding of the data and to ensure the end project was applicable to their field.
