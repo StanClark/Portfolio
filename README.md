@@ -15,4 +15,12 @@ using python, latex and GIS
 
 ## CollatedAssessments
 This was made by me during my first year with the Usher Institute as an internal tool to extract and view the learning objectives and assessment types of the courses ran by the Usher Institute. 
+
 using python and excel
+
+## EPL Elements of Programming Languages
+Done during my studies at the university of Edinburgh.
+
+The work within this course focused on dissecting the low level function in many languages to develope a more indepth understanding of commonly used but often overlooked functionality
+
+done in Scala
