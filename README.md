@@ -24,3 +24,8 @@ Done during my studies at the university of Edinburgh.
 The work within this course focused on dissecting the low level function in many languages to develope a more indepth understanding of commonly used but often overlooked functionality
 
 done in Scala
+
+## Euclid Scraper
+This project was made to automate the process of extracting data from a student database from its interface as conventional API calls could not be used.
+
+Previously 10s of hours were spent performing this task when last performed which had a cohort one quarter the current size. After this was implemented the task could be easily started and would finish within a few hours
