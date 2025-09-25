@@ -36,3 +36,20 @@ Done in Python
 This was done when working for the Usher Institute. The software I made extracted comments from the teams courses and categorized them for use in analysis of course.
 
 Done in Python
+
+## Media Crawler
+This was made when working for the Usher Institute. This software would perform mass modifications via an admin portal that did not have conventional options for mass modifications.
+
+Done in Python
+
+## Moss Project
+This was done during my studies at the University of Edinburgh. The project focused on simulating the buying and selling of farm land within a flooding area in terms of short vs long term financial planning and the effects of different intervention in these scenarios.
+
+Done in Netlogo
+
+## Software Testing
+This was done during my studies at the University of Edinburgh. This focused on creating unit, integration and system testing,
+
+Done in Java and JUnit
+
+## 
