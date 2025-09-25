@@ -26,6 +26,13 @@ The work within this course focused on dissecting the low level function in many
 done in Scala
 
 ## Euclid Scraper
-This project was made to automate the process of extracting data from a student database from its interface as conventional API calls could not be used.
+This project was made when I worked for the Usher Institute to automate the process of extracting data from a student database from its interface as conventional API calls could not be used.
 
-Previously 10s of hours were spent performing this task when last performed which had a cohort one quarter the current size. After this was implemented the task could be easily started and would finish within a few hours
+Previously 10s of hours were spent performing this task when last performed which had a cohort one quarter the current size. After this was implemented the task could be easily started and would finish within a few hours in the background.
+
+Done in Python
+
+## LearnScraper
+This was done when working for the Usher Institute. The software I made extracted comments from the teams courses and categorized them for use in analysis of course.
+
+Done in Python
