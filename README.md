@@ -43,7 +43,7 @@ This was made when working for the Usher Institute. This software would perform 
 Done in Python
 
 ## Moss Project
-This was done during my studies at the University of Edinburgh. The project focused on simulating the buying and selling of farm land within a flooding area in terms of short vs long term financial planning and the effects of different intervention in these scenarios.
+This was done during my studies at the University of Edinburgh. The project focused on simulating the buying and selling of farm land within a flooding area in terms of short vs long term financial planning and the effects of different intervention in these scenarios. This was part of a group project where I took on the coding and technical descriptions in the document
 
 Done in Netlogo
 
@@ -52,4 +52,7 @@ This was done during my studies at the University of Edinburgh. This focused on 
 
 Done in Java and JUnit
 
-## 
+## Course Dashboard
+This was done while working in the Usher Institute. This was a web application made in SHINY as part of an agile team which would scrum each week then do some work seperately throughout the week.
+
+Done in Python and SHINY
